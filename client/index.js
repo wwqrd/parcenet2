@@ -4,9 +4,9 @@ console.log('start');
 
 client.on('connect', () => {
 
-  console.log('connected', `http://${process.env.HUB_HOST}:${process.env.HUB_PORT}`);
+  console.log('connected');
 
-  client.on('message', (data) => {
-    console.log('received', data);
+  client.on('action', (data) => {
+    console.log('action', data);
   });
 });

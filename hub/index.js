@@ -6,13 +6,19 @@ console.log('start');
 
 hub.on('connection', (client) => {
   console.log('connected');
-
-  client.emit('message', 'welcome');
 });
 
-web.get('/', (req, res) => {
-  hub.emit('message', 'someone visited');
-  res.send('watched');
+web.get('/action/:action', (req, res) => {
+  const action = Object.assign({
+    action: req.params.action
+  }, { arguments: req.query });
+
+  console.log('action', action);
+
+  hub.emit('action', action);
+
+  res.send('ok');
+
 });
 
 server.listen(process.env.HUB_PORT);
