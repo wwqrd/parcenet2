@@ -1,0 +1,14 @@
+{
+  "name": "parcenet2",
+  "version": "1.0.0",
+  "description": "Automation platform",
+  "main": "server/index.js",
+  "author": "Steve Mckellar <steve@wwqrd.uk>",
+  "license": "MIT",
+  "dependencies": {
+    "koa": "^2.2.0",
+    "koa-socket": "^4.4.0",
+    "socket.io": "^1.7.3",
+    "socket.io-client": "^1.7.3"
+  }
+}
