@@ -1,11 +1,18 @@
-var hub = require('socket.io').listen(process.env.HUB_PORT);
+const web = require('express')();
+const server = require('http').createServer(web);
+const hub = require('socket.io')(server);
 
-console.log('Init server');
-console.log(`${process.env.HUB_PORT}`);
+console.log('start');
 
-hub.sockets.on('connection', (socket) => {
-    console.log('Server-Client Connected!');
+hub.on('connection', (client) => {
+  console.log('connected');
 
-    socket.on('message', (data) => {
-    });
+  client.emit('message', 'welcome');
 });
+
+web.get('/', (req, res) => {
+  hub.emit('message', 'someone visited');
+  res.send('watched');
+});
+
+server.listen(process.env.HUB_PORT);
